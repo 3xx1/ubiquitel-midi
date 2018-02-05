@@ -1,6 +1,7 @@
 // dependencies
 var del = require('del');
 var electron = require('electron-connect').server.create();
+var sequence = require('run-sequence');
 
 // gulp dependencies
 var gulp = require('gulp');
@@ -29,6 +30,7 @@ var copyLocations = [
 ];
 
 var watchLocations = {
+  html: './src/index.html',
   sass: './src/sass/**/*.scss',
   js: './src/js/**/*.js'
 };
@@ -60,6 +62,10 @@ gulp.task('copy', function(cb) {
     .pipe(connect.reload());
   }
   cb();
+});
+
+gulp.task('reload', function() {
+  connect.reload();
 });
 
 /* SASS */
@@ -97,5 +103,6 @@ gulp.task('dev', ['clean', 'copy'], function() {
   gulp.start('sass:watch');
   gulp.start('scripts');
   gulp.start('scripts:watch');
+  gulp.start('watch');
   electron.start();
 });
