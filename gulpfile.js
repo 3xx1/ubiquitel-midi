@@ -103,6 +103,5 @@ gulp.task('dev', ['clean', 'copy'], function() {
   gulp.start('sass:watch');
   gulp.start('scripts');
   gulp.start('scripts:watch');
-  gulp.start('watch');
   electron.start();
 });
