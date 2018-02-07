@@ -33,6 +33,7 @@
     "run-sequence": "^2.2.1"
   },
   "dependencies": {
+    "electron": "^1.7.12",
     "express": "^4.16.2"
   }
 }
