@@ -1,0 +1,14 @@
+.ubi-card-container {
+  border: 1px solid #777777;
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+
+  .hit-indicator {
+    background: #000000;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+  }
+}

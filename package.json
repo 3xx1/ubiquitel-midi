@@ -2,10 +2,9 @@
   "name": "ubiquitel-midi",
   "version": "1.0.0",
   "description": "",
-  "main": "./src/main.js",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "gulp dev"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -17,23 +16,5 @@
   "bugs": {
     "url": "https://github.com/3xx1/ubiquitel-midi/issues"
   },
-  "homepage": "https://github.com/3xx1/ubiquitel-midi#readme",
-  "devDependencies": {
-    "del": "^3.0.0",
-    "electron-connect": "^0.6.3",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^4.1.0",
-    "gulp-concat": "^2.6.1",
-    "gulp-connect": "^5.2.0",
-    "gulp-plumber": "^1.2.0",
-    "gulp-sass": "^3.1.0",
-    "gulp-util": "^3.0.8",
-    "gulp-watch": "^5.0.0",
-    "path": "^0.12.7",
-    "run-sequence": "^2.2.1"
-  },
-  "dependencies": {
-    "electron": "^1.7.12",
-    "express": "^4.16.2"
-  }
+  "homepage": "https://github.com/3xx1/ubiquitel-midi#readme"
 }
