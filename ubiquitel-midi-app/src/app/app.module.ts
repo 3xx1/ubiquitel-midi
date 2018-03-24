@@ -1,18 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
+// App Component
 import { AppComponent } from './app.component';
 
+// Components
+import { UbiCard } from './components/ubi-card/ubi-card.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    // App containers
+    AppComponent,
+
+    // Components
+    UbiCard
   ],
   imports: [
     BrowserModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
