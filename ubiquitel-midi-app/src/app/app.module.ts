@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 // App Component
 import { AppComponent } from './app.component';
@@ -16,7 +17,8 @@ import { UbiCard } from './components/ubi-card/ubi-card.component';
     UbiCard
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [],
   bootstrap: [ AppComponent ]
