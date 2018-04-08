@@ -26,7 +26,9 @@
     "@angular/router": "^5.2.0",
     "angular-bootstrap-md": "^5.2.3",
     "core-js": "^2.4.1",
+    "midi": "^0.9.5",
     "rxjs": "^5.5.6",
+    "web-midi-api": "^1.4.4",
     "webmidi": "^2.0.4",
     "zone.js": "^0.8.19"
   },

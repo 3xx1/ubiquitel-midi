@@ -7,9 +7,14 @@ import * as WebMidi from 'webmidi';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'app';
-
   ngOnInit() {
-    console.log(WebMidi, 'web midi');
+    WebMidi.enable(function (err) {
+      if (err) {
+        console.error(err, 'error enabling web midi module');
+        return;
+      }
+      console.log('inputs', WebMidi.inputs);
+      console.log('outputs', WebMidi.outputs);
+    });
   }
 }
