@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 // Containers
-import PageOne from '../PageOne/loadable';
-import PageTwo from '../PageTwo/loadable';
+import Dashboard from '../Dashboard/loadable';
 
 // Styles
 import './style.scss';
@@ -14,8 +13,7 @@ class App extends Component {
       <div className="app">
         <div className="app-contents">
           <Switch>
-            <Route path="/page-one" component={PageOne} />
-            <Route path="/page-two" component={PageTwo} />
+            <Route path="/" component={Dashboard} />
           </Switch>
         </div>
       </div>
