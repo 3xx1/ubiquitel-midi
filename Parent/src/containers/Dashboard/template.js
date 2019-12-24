@@ -2,6 +2,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// Components
+import Finger from '../../components/Finger';
+
 // Styles
 import './style.scss';
 
@@ -13,7 +16,7 @@ export default class Dashboard extends React.PureComponent {
   render() {
     return (
       <div className="container__dashboard">
-        <p>Dashboard</p>
+        <Finger />
       </div>
     );
   }
