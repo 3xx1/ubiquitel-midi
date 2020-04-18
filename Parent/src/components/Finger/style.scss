@@ -1,7 +1,27 @@
 .finger--component {
-    width: 100px;
+    width: 100%;
+    display: flex;
+    border: 1px solid #777;
 
-    img {
+    .header {
+        width: 100px;
+        img {
+            width: 100%;
+        }
+        p {
+            color: white;
+        }
+    }
+
+    .timeline {
         width: 100%;
+
+        &::before {
+            display: block;
+            content: ' ';
+            border-top: 1px solid white;
+            position: relative;
+            top: 50%;
+        }
     }
 }
