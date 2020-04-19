@@ -1,0 +1,14 @@
+.waveform--component {
+  width: 100%;
+  height: 200px;
+  display: flex;
+
+  .header {
+    width: 100px;
+  }
+
+  .body {
+    width: 100%;
+    background-color: #777;
+  }
+}

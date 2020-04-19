@@ -3,6 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Components
+import Control from '../../components/Control';
+import Waveform from '../../components/Waveform';
 import Finger from '../../components/Finger';
 
 // Styles
@@ -16,7 +18,11 @@ export default class Dashboard extends React.PureComponent {
   render() {
     return (
       <div className="container__dashboard">
-        <Finger />
+        <Control />
+        <Waveform label={'Wave 1'} />
+        <Finger label={'Ub 1'} />
+        <Finger label={'Ub 2'} />
+        <Finger label={'Ub 3'} />
       </div>
     );
   }

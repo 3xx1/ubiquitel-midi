@@ -12,22 +12,20 @@ export default class Finger extends React.PureComponent {
     }
 
     componentDidMount() {
-        setInterval(() => {
-            this.tapImageSequence();
-        }, 500);
-    }
-
-    tapImageSequence() {
-        this.setState({...this.state, imageSequence: 1});
-        setTimeout(() => { this.setState({...this.state, imageSequence: 2}); }, 50);
-        setTimeout(() => { this.setState({...this.state, imageSequence: 1}); }, 100);
-        setTimeout(() => { this.setState({...this.state, imageSequence: 0}); }, 150);
+        // setInterval(() => {
+        //     this.tapImageSequence();
+        // }, 500);
     }
 
     render() {
         return (
             <div className="finger--component">
-                <img src={require(`../../assets/images/fingers--${this.state.imageSequence}.png`)} />
+                <div className="header">
+                    <img src={require(`../../assets/images/fingers--0.png`)} />
+                    <p>{this.props.label}</p>
+                </div>
+                <div className="timeline">
+                </div>
             </div>
         );
     }
