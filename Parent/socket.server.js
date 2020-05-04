@@ -14,6 +14,7 @@ io.on('connection', function(socket) {
 
   // Remote Action Dispatcher
   socket.on('action.dispatch', function(msg) {
+    console.log(msg) // このメッセージをユビキテルの子機に繋げる (todo)
     socket.broadcast.emit('action.dispatch', msg);
   });
 

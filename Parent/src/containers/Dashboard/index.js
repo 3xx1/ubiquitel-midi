@@ -1,7 +1,11 @@
 import { connect } from 'react-redux';
 
 import * as DAWControlActions from '../../redux/DAWControl/actions';
+import * as FingerControlActions from '../../redux/FingerControl/actions';
 import Dashboard from './template';
+
+import SocketClientService from '../../services/socket-client.service';
+const socketClientService = new SocketClientService();
 
 const mapStateToProps = (state) => {
   return {
@@ -16,7 +20,9 @@ const mapDispatchToProps = (dispatch) => ({
       : dispatch(DAWControlActions.dawControl__play());
   },
   onBackwardClicked: () => {
-    dispatch(DAWControlActions.dawControl__backward());
+  },
+  onDebugClicked: () => {
+    socketClientService.dispatchGlobal(FingerControlActions.fingerControl__send(1234, 128));
   }
 });
 

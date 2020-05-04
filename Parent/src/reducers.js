@@ -5,6 +5,7 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 // Children Reducers
 import globalReducer from './containers/_App/redux/reducer';
 import DAWControlReducer from './redux/DAWControl/reducer';
+import FingerControlReducer from './redux/FingerControl/reducer';
 
 // Initial routing state
 const routeInitialState = {
@@ -28,6 +29,7 @@ export default function createReducer(injectedReducers) {
     route: routeReducer,
     global: globalReducer,
     DAWControl: DAWControlReducer,
+    FingerControl: FingerControlReducer,
     ...injectedReducers
   });
 }

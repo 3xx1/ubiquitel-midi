@@ -6,7 +6,7 @@ import { store } from '../index.js';
 import { environment } from '../environment';
 
 export default class SocketClientService {
-  constructor() {
+  constructor(type = 'children') {
     const self = this;
     self.url = process.env.NODE_ENV === 'production'
             ? `http://${window.document.location.hostname}:${environment.production.socketPort}/`
