@@ -18,8 +18,17 @@ export default class Dashboard extends React.PureComponent {
   render() {
     return (
       <div className="container__dashboard">
-        <Control />
-        <Waveform label={'Wave 1'} />
+        {/* Temp Buttons for debugging */}
+        <button className="__DEBUG" onClick={() => this.props.onDebugClicked()}>DEBUG</button>
+
+        <Control
+          onPlayPauseClicked={() => this.props.onPlayPauseClicked(this.props.isPlaying)}
+          onBackwardClicked={() => this.props.onBackwardClicked()}
+        />
+        <Waveform 
+          label={'Wave 1'} 
+          isPlaying={this.props.isPlaying}
+        />
         <Finger label={'Ub 1'} />
         <Finger label={'Ub 2'} />
         <Finger label={'Ub 3'} />

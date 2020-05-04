@@ -15,7 +15,8 @@ export default class Waveform extends React.PureComponent {
     render() {
         return (
             <div className="control--component">
-               control
+                <button className="play-pause" onClick={() => this.props.onPlayPauseClicked()}>Play/Pause</button>
+                <button className="backward" onClick={() => this.props.onBackwardClicked()}>Backward</button>
             </div>
         );
     }

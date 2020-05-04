@@ -1,15 +1,16 @@
 // Dependencies
-import { fromJS } from 'immutable';
-import { combineReducers } from 'redux-immutable';
+import { combineReducers } from 'redux';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
 // Children Reducers
 import globalReducer from './containers/_App/redux/reducer';
+import DAWControlReducer from './redux/DAWControl/reducer';
+import FingerControlReducer from './redux/FingerControl/reducer';
 
 // Initial routing state
-const routeInitialState = fromJS({
+const routeInitialState = {
   location: null,
-});
+};
 
 // Route Reducer
 function routeReducer(state = routeInitialState, action) {
@@ -27,6 +28,8 @@ export default function createReducer(injectedReducers) {
   return combineReducers({
     route: routeReducer,
     global: globalReducer,
+    DAWControl: DAWControlReducer,
+    FingerControl: FingerControlReducer,
     ...injectedReducers
   });
 }
