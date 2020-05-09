@@ -24,7 +24,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "socket-serve": "node socket.server.js &"
+    "socket-serve": "node socket.server.js &",
+    "dev": "npm run socket-serve && npm start"
   },
   "eslintConfig": {
     "extends": "react-app"
