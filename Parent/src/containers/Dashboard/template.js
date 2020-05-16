@@ -19,7 +19,7 @@ export default class Dashboard extends React.PureComponent {
     return (
       <div className="container__dashboard">
         {/* Temp Buttons for debugging */}
-        <button className="__DEBUG" onClick={() => this.props.onDebugClicked()}>DEBUG</button>
+        <button className="__DEBUG" onClick={() => this.props.onDebugClicked()}>debug</button>
 
         <Control
           onPlayPauseClicked={() => this.props.onPlayPauseClicked(this.props.isPlaying)}

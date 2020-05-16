@@ -1,5 +1,6 @@
 import React from 'react';
 import WaveSurfer from 'wavesurfer.js';
+import TimelinePlugin from 'wavesurfer.js/dist/plugin/wavesurfer.timeline.min.js';
 import PropTypes from 'prop-types';
 import './style.scss';
 
@@ -14,6 +15,11 @@ export default class Waveform extends React.PureComponent {
   componentDidMount() {
     this.waveform = WaveSurfer.create({
       container: '#waveform',
+      plugins: [
+        TimelinePlugin.create({
+          container: '#waveform-timeline'
+        })
+      ]
     });
     this.waveform.load(url);
     this.waveform.zoom(100);
@@ -34,6 +40,7 @@ export default class Waveform extends React.PureComponent {
         </div>
         <div className="body">
           <div id="waveform" />
+          <div id="waveform-timeline" />
         </div>
       </div>
     );
