@@ -14,16 +14,22 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onPlayPauseClicked: (isPlaying) => {
-    isPlaying 
-      ? dispatch(DAWControlActions.dawControl__pause())
-      : dispatch(DAWControlActions.dawControl__play());
+  onPlayPauseClicked: (isPlaying, data) => {
+    if (isPlaying) {
+      dispatch(DAWControlActions.dawControl__pause());
+    } else {
+      dispatch(DAWControlActions.dawControl__play());
+      socketClientService.dispatchGlobal(FingerControlActions.fingerControl__send(data));
+    }
   },
   onBackwardClicked: () => {
   },
   onDebugClicked: () => {
     socketClientService.dispatchGlobal(FingerControlActions.fingerControl__send(1234, 128));
-  }
+  },
+  setAudioData: (data) => {
+    dispatch(DAWControlActions.dawControl__setData(data));
+  },
 });
 
 export default connect(

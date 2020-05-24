@@ -7,7 +7,8 @@ export default class Finger extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            imageSequence: 0
+            imageSequence: 0,
+            data: []
         };
     }
 
@@ -15,9 +16,21 @@ export default class Finger extends React.PureComponent {
         // setInterval(() => {
         //     this.tapImageSequence();
         // }, 500);
+        this.setState({
+            ...this.state,
+            data: this.props.data
+        })
     }
 
     render() {
+        const dots = [];
+        this.state.data.forEach((datum) => {
+            dots.push(<div className="dot" style={{ 
+                width: `${datum.volume}px`,
+                height: `${datum.volume}px`,
+                top: `${60 - datum.volume/2}px`,
+                left: `${datum.time*100 - datum.volume/2}px` }} />);
+        })
         return (
             <div className="finger--component">
                 <div className="header">
@@ -25,6 +38,7 @@ export default class Finger extends React.PureComponent {
                     <p>{this.props.label}</p>
                 </div>
                 <div className="timeline">
+                    {dots}
                 </div>
             </div>
         );

@@ -23,6 +23,12 @@ export default class Waveform extends React.PureComponent {
     });
     this.waveform.load(url);
     this.waveform.zoom(100);
+    this.waveform.on('ready', () => {
+      this.props.onAudioLoaded({
+        duration: this.waveform.getDuration(),
+        zoom: 100
+      });
+    });
   }
 
   componentDidUpdate() {
@@ -49,4 +55,5 @@ export default class Waveform extends React.PureComponent {
 
 Waveform.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
+  onAudioLoaded: PropTypes.func
 }
