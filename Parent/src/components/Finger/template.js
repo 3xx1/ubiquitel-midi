@@ -29,7 +29,7 @@ export default class Finger extends React.PureComponent {
                 width: `${datum.volume}px`,
                 height: `${datum.volume}px`,
                 top: `${60 - datum.volume/2}px`,
-                left: `${datum.time*100 - datum.volume/2}px` }} />);
+                left: `${datum.time*100 - this.props.offsetLeft - datum.volume/2}px` }} />);
         })
         return (
             <div className="finger--component">

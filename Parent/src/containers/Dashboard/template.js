@@ -32,10 +32,11 @@ export default class Dashboard extends React.PureComponent {
           label={'Wave 1'} 
           isPlaying={this.props.isPlaying}
           onAudioLoaded={(data) => this.props.setAudioData(data)}
+          onWaveScrolled={(data) => this.props.setTimelineScroll(data)}
         />
-        <Finger label={'Ub 1'} data={fingerData.finger0} />
-        <Finger label={'Ub 2'} data={fingerData.finger1} />
-        <Finger label={'Ub 3'} data={fingerData.finger2} />
+        <Finger label={'Ub 1'} data={fingerData.finger0} offsetLeft={this.props.offsetLeft} />
+        <Finger label={'Ub 2'} data={fingerData.finger1} offsetLeft={this.props.offsetLeft} />
+        <Finger label={'Ub 3'} data={fingerData.finger2} offsetLeft={this.props.offsetLeft} />
       </div>
     );
   }
