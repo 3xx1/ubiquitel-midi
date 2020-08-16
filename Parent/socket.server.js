@@ -18,6 +18,18 @@ io.on('connection', function(socket) {
     socket.broadcast.emit('action.dispatch', msg);
   });
 
+  // Send Data Broadcast - DAW Level
+  socket.on('buffer.daw.send.broadcast', function(msg) {
+    socket.broadcast.emit('buffer.daw', msg);
+    console.log('buffer.daw', msg);
+  });
+
+  // Send Data Broadcast - Finger Level
+  socket.on('buffer.finger.send.broadcast', function(msg) {
+    socket.broadcast.emit('buffer.finger', msg);
+    console.log('buffer.finger', msg);
+  });
+
   // Refreshing All Screens
   socket.on('refresh', function(msg) {
     io.emit('refresh', true);

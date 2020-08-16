@@ -29,6 +29,12 @@ export default class Waveform extends React.PureComponent {
         zoom: 100
       });
     });
+    this.waveform.on('scroll', (event) => {
+      this.props.onWaveScrolled({
+        scrollLeft: event.target.scrollLeft,
+        currentTime: this.waveform.getCurrentTime()
+      });
+    })
   }
 
   componentDidUpdate() {

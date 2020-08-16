@@ -31,6 +31,16 @@ export default class SocketClientService {
     this.socket.emit('action.dispatch', action);
   }
 
+  sendDawEvent(blob) {
+    this.socket.emit('buffer.daw.send.broadcast', blob);
+    console.log(blob, 'daw');
+  }
+
+  sendFingerEvent(blob) {
+    this.socket.emit('buffer.daw.send.broadcast', blob);
+    console.log(blob, 'finger');
+  }
+
   refreshSystem() {
     this.socket.emit('refresh', true);
   }
