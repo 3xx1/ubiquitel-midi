@@ -4,18 +4,21 @@ import * as DAWControlActions from '../../redux/DAWControl/actions';
 import * as FingerControlActions from '../../redux/FingerControl/actions';
 import Dashboard from './template';
 
+import { generateFingerSignal } from '../../helpers/generateSignal';
+
 import SocketClientService from '../../services/socket-client.service';
 const socketClientService = new SocketClientService();
 
 const mapStateToProps = (state) => {
   return {
     isPlaying: state.DAWControl.isPlaying,
+    currentTime: state.DAWControl.currentTime,
     offsetLeft: state.DAWControl.currentScrollLeft
   }
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onPlayPauseClicked: (isPlaying, data) => {
+  onPlayPauseClicked: (isPlaying, data, offset) => {
     if (isPlaying) {
       dispatch(DAWControlActions.dawControl__pause());
       
@@ -33,37 +36,15 @@ const mapDispatchToProps = (dispatch) => ({
         eventType: 'DAW__PLAY'
       });
 
-      socketClientService.sendFingerEvent({
-        eventType: 'FINGER__SIGNAL',
-        buffer: {
-          signal: [
-            {
-              action: 'FINGER__UP',
-              t: 40
-            },
-            {
-              action: 'FINGER__DOWN',
-              t: 45
-            },
-            {
-              action: 'FINGER__UP',
-              t: 140
-            },
-            {
-              action: 'FINGER__DOWN',
-              t: 150
-            },
-            {
-              action: 'FINGER__UP',
-              t: 200
-            },
-            {
-              action: 'FINGER__DOWN',
-              t: 225
-            },
-          ]
-        }
-      })
+      data.map(datum => {
+        socketClientService.sendFingerEvent({
+          eventType: 'FINGER__SIGNAL',
+          buffer: {
+            name: datum.name,
+            signal: generateFingerSignal(datum.data, offset)
+          }
+        })
+      });
     }
   },
   onBackwardClicked: () => {

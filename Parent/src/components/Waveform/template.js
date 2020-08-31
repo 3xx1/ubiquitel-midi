@@ -34,7 +34,12 @@ export default class Waveform extends React.PureComponent {
         scrollLeft: event.target.scrollLeft,
         currentTime: this.waveform.getCurrentTime()
       });
-    })
+    });
+    this.waveform.on('interaction', (event) => {
+      this.props.onWaveInteracted({
+        currentTime: this.waveform.getCurrentTime()
+      })
+    });
   }
 
   componentDidUpdate() {

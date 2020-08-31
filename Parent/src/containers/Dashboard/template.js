@@ -25,7 +25,7 @@ export default class Dashboard extends React.PureComponent {
         <button className="__DEBUG" onClick={() => this.props.onDebugClicked()}>debug</button>
 
         <Control
-          onPlayPauseClicked={() => this.props.onPlayPauseClicked(this.props.isPlaying, fingerData)}
+          onPlayPauseClicked={() => this.props.onPlayPauseClicked(this.props.isPlaying, fingerData, this.props.currentTime)}
           onBackwardClicked={() => this.props.onBackwardClicked()}
         />
         <Waveform 
@@ -33,10 +33,13 @@ export default class Dashboard extends React.PureComponent {
           isPlaying={this.props.isPlaying}
           onAudioLoaded={(data) => this.props.setAudioData(data)}
           onWaveScrolled={(data) => this.props.setTimelineScroll(data)}
+          onWaveInteracted={(time) => this.props.setTimelineScroll(time)}
         />
-        <Finger label={'Ub 1'} data={fingerData.finger0} offsetLeft={this.props.offsetLeft} />
-        <Finger label={'Ub 2'} data={fingerData.finger1} offsetLeft={this.props.offsetLeft} />
-        <Finger label={'Ub 3'} data={fingerData.finger2} offsetLeft={this.props.offsetLeft} />
+        {fingerData.map((finger) => {
+          return (
+            <Finger label={finger.name} data={finger.data} offsetLeft={this.props.offsetLeft} />
+          );
+        })}
       </div>
     );
   }
