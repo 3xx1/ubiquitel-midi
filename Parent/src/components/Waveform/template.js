@@ -35,7 +35,7 @@ export default class Waveform extends React.PureComponent {
         currentTime: this.waveform.getCurrentTime()
       });
     });
-    this.waveform.on('interaction', (event) => {
+    this.waveform.on('seek', (event) => {
       this.props.onWaveInteracted({
         currentTime: this.waveform.getCurrentTime()
       })
