@@ -1,3 +1,123 @@
+void updateUbState() {
+  if(stopRequest) {
+    stop();
+  }
+  if(playRequest) {
+    play();
+  }
+  if(us == DOWN || us == UP) {
+    stepForward();
+  }
+}
+
+void stepForward() {
+  if(signals[r][next] == gtime) {
+    //上げ下ろしの動作切り替え
+    upDown();
+  }
+  //ユビ振り上げ中、待機中はステップ数をインクリメント
+  gtime++;
+}
+
+//上げ下ろしの動作切り替え
+void upDown() {
+  if(us == DOWN) {
+    up();
+  }else if(us == UP) {
+    down();
+  }
+  next++;
+  //バッファ内を全て再生し、次のバッファにデータがあったらバッファ切り替え
+  if(next == numSignals[r]) {
+    if(numSignals[w] > 0) {
+      swapBuffer();
+    }else {//バッファが空なら停止
+      stop();
+      Serial.println("buffer empty, stopped.");
+    }
+  }
+}
+
+void stop() {
+  us = STOP;
+  gtime = 0;
+  next = 0;
+  stepCount = 0;
+  stopRequest = false;
+}
+
+void play() {
+  if(numSignals[w] > 0) {
+    swapBuffer();
+    down();
+  }else {
+    Serial.println("buffer empty, play failed.");
+  }
+  playRequest = false;
+}
+
+void up() {
+  us = UP;
+  Serial.println("up.");
+}
+
+void down() {
+  us = DOWN;
+  Serial.println("down.");
+}
+
+void swapBuffer() {
+  for(int i = 0; i < 512; i++) {
+    signals[r][i] = 0;
+  }
+  numSignals[r] = 0;
+  next = 0;
+  r = (r+1)%2;
+  w = (w+1)%2;
+}
+
+void driveMotor() {
+  if(us == DOWN || us == STOP || mute) {
+    stopMotor();
+  }else if(us == UP) {
+    stepMotor();
+  }
+}
+
+void stepMotor()
+{
+    digitalWrite(Vs2B, HIGH);
+    digitalWrite(PS, LOW);
+    digitalWrite(LED, HIGH);
+  
+    switch (stepCount) {
+      case 0:    // 00
+        digitalWrite(inA, LOW);
+        digitalWrite(inB, LOW);
+        break;
+      case 1:    // 10
+        digitalWrite(inA, HIGH);
+        digitalWrite(inB, LOW);
+        break;
+      case 2:    //11
+        digitalWrite(inA, HIGH);
+        digitalWrite(inB, HIGH);
+        break;
+      case 3:    //01
+        digitalWrite(inA, LOW);
+        digitalWrite(inB, HIGH);
+        break;
+    }
+    stepCount = stepCount++%4;
+}
+
+void stopMotor() {
+    digitalWrite(PS, HIGH);
+    digitalWrite(Vs2B, LOW);
+    digitalWrite(LED, LOW);
+}
+
+/*
 void syncUb() {
   gtime = 0;
   playtime = 100;
@@ -98,36 +218,4 @@ void stepTime() {
       }else if(rcnt > 1) rcnt--;
     }
 }
-
-void stepMotor()
-{
-    int thisStep = stepCount%4;
-    digitalWrite(Vs2B, HIGH);
-    digitalWrite(PS, LOW);
-    digitalWrite(LED, HIGH);
-  
-    switch (thisStep) {
-        case 0:    // 00
-            digitalWrite(inA, LOW);
-            digitalWrite(inB, LOW);
-        break;
-        case 1:    // 10
-            digitalWrite(inA, HIGH);
-            digitalWrite(inB, LOW);
-        break;
-        case 2:    //11
-            digitalWrite(inA, HIGH);
-            digitalWrite(inB, HIGH);
-        break;
-        case 3:    //01
-        digitalWrite(inA, LOW);
-        digitalWrite(inB, HIGH);
-        break;
-    }
-}
-
-void stopMotor() {
-    digitalWrite(PS, HIGH);
-    digitalWrite(Vs2B, LOW);
-    digitalWrite(LED, LOW);
-}
+*/

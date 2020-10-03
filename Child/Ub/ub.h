@@ -1,8 +1,6 @@
 //Wi-Fi----------------------------------
 char ssid[256] = "";
 char password[256] = "";
-long packet[100];
-int packetSize = 0;
 
 //Ubiquitel Server-----------------------
 String serverURL;
@@ -10,19 +8,29 @@ int serverPort;
 SocketIoClient webSocket;
 
 //Tap-------------------------------------
-typedef struct Tap
+typedef struct Signal
 {
   int ts; //Time stamp(Release point)
   char v;  //Velocity
   int sp; //Start point
-} Tap;
+} Signal;
 
-Tap taps[2][256];
-int numTaps[2] = {0, 0};
+typedef enum {
+  UP,
+  DOWN,
+  STOP
+} UbState;
+
+UbState us = STOP;
+bool stopRequest = false;
+bool playRequest = false;
+bool mute = false;
+int signals[2][512];
+int numSignals[2] = {0, 0};
 int looptime[2] = {0, 0};
 int repeat[2];
 int rcnt = 0;
-int w = 0;
+int w = 1;
 int r = 0;
 int vTable[11] = {0, 8, 9, 10, 11, 12, 14, 16, 22, 30, 40};
 volatile int next = 0;
