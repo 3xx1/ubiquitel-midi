@@ -1,9 +1,11 @@
+@import '../../styles/colors';
+
 .app {
   
 }
 
 .app-contents {
-  background-color: #282c34;
+  background-color: $color--pink__light;
   min-height: 100vh;
-  color: white;
+  color: $color--red;
 }

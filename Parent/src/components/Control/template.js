@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { PlayArrow, Pause, SkipPrevious } from '@material-ui/icons';
 import './style.scss';
 
 // Class
@@ -15,8 +16,13 @@ export default class Waveform extends React.PureComponent {
     render() {
         return (
             <div className="control--component">
-                <button className="play-pause" onClick={() => this.props.onPlayPauseClicked()}>Play/Pause</button>
-                <button className="backward" onClick={() => this.props.onBackwardClicked()}>Backward</button>
+                <button className="control--button backward" onClick={() => this.props.onBackwardClicked()}>
+                    <SkipPrevious />
+                </button>
+                <button className="control--button play-pause" onClick={() => this.props.onPlayPauseClicked()}>
+                    <PlayArrow />
+                    <Pause />
+                </button>
             </div>
         );
     }

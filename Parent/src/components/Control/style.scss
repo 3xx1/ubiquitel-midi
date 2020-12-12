@@ -1,5 +1,12 @@
+@import '../../styles/colors';
+
 .control--component {
   width: 100%;
   height: 100px;
-  background-color: #bbb;
+}
+
+.control--button {
+  background-color: transparent;
+  border: none;
+  color: $color--red;
 }

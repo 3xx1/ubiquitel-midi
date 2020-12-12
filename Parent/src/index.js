@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import createHistory from 'history/createBrowserHistory';
 
 // Definitions
+import './assets/fonts/TowerGothic.otf';
 import './index.scss';
 import * as serviceWorker from './serviceWorker';
 import App from './containers/_App/template';

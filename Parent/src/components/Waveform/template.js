@@ -15,11 +15,18 @@ export default class Waveform extends React.PureComponent {
   componentDidMount() {
     this.waveform = WaveSurfer.create({
       container: '#waveform',
-      plugins: [
-        TimelinePlugin.create({
-          container: '#waveform-timeline'
-        })
-      ]
+      waveColor: '#F70000',
+      progressColor: '#F7ABAB',
+      cursorColor: '#F70000',
+      barWidth: 3,
+      cursorWidth: 6,
+      height: 200,
+      barGap: 3
+      // plugins: [
+      //   TimelinePlugin.create({
+      //     container: '#waveform-timeline'
+      //   })
+      // ]
     });
     this.waveform.load(url);
     this.waveform.zoom(100);
