@@ -16,13 +16,15 @@ export default class Waveform extends React.PureComponent {
     render() {
         return (
             <div className="control--component">
-                <button className="control--button backward" onClick={() => this.props.onBackwardClicked()}>
-                    <SkipPrevious />
-                </button>
-                <button className="control--button play-pause" onClick={() => this.props.onPlayPauseClicked()}>
-                    <PlayArrow />
-                    <Pause />
-                </button>
+                <div className="control--button-container">
+                    <button className="control--button backward" onClick={() => this.props.onBackwardClicked()}>
+                        <SkipPrevious style={{ fontSize: 80 }} />
+                    </button>
+                    <button className="control--button play-pause" onClick={() => this.props.onPlayPauseClicked()}>
+                        <PlayArrow style={{ fontSize: 80, marginRight: -30 }} />
+                        <Pause style={{ fontSize: 80 }} />
+                    </button>
+                </div>
             </div>
         );
     }
