@@ -4,6 +4,8 @@ h1 {
   font-family: TowerGothicKT;
   font-size: 56px;
   letter-spacing: 1px;
+  margin: 0;
+  text-shadow: 2px -2px 2px #777;
 }
 
 h2,
@@ -15,4 +17,5 @@ p,
 a {
   font-family: Krungthep;
   color: $color--red;
+  margin: 0;
 }

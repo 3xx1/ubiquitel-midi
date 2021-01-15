@@ -6,6 +6,7 @@
     display: flex;
     padding: 20px;
     background-color: $color--yellow__light;
+    height: 120px;
 
     .header {
         width: 100px;
@@ -21,7 +22,7 @@
     .timeline {
         width: 100%;
         position: relative;
-        overflow-x: scroll;
+        overflow-x: hidden;
 
         &::before {
             display: block;

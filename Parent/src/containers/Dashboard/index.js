@@ -18,7 +18,26 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onPlayPauseClicked: (isPlaying, data, offset) => {
+  onPlayClicked: (data, offset) => {
+    dispatch(DAWControlActions.dawControl__play());
+    socketClientService.dispatchGlobal(FingerControlActions.fingerControl__send(data));
+
+    // temp play event
+    socketClientService.sendDawEvent({
+      eventType: 'DAW__PLAY'
+    });
+
+    data.map(datum => {
+      socketClientService.sendFingerEvent({
+        eventType: 'FINGER__SIGNAL',
+        buffer: {
+          name: datum.name,
+          signal: generateFingerSignal(datum.data, offset)
+        }
+      })
+    });
+  },
+  onPauseBackwardClicked: (isPlaying, data, waveform) => {
     if (isPlaying) {
       dispatch(DAWControlActions.dawControl__pause());
       
@@ -26,28 +45,15 @@ const mapDispatchToProps = (dispatch) => ({
       socketClientService.sendDawEvent({
         eventType: 'DAW__PAUSE'
       });
-
     } else {
-      dispatch(DAWControlActions.dawControl__play());
-      socketClientService.dispatchGlobal(FingerControlActions.fingerControl__send(data));
-
-      // temp play event
+      dispatch(DAWControlActions.dawControl__backward());
+      waveform.current.rewindTimeline();
+      
+      // temp pause event
       socketClientService.sendDawEvent({
-        eventType: 'DAW__PLAY'
-      });
-
-      data.map(datum => {
-        socketClientService.sendFingerEvent({
-          eventType: 'FINGER__SIGNAL',
-          buffer: {
-            name: datum.name,
-            signal: generateFingerSignal(datum.data, offset)
-          }
-        })
+        eventType: 'DAW__BACKWARD'
       });
     }
-  },
-  onBackwardClicked: () => {
   },
   onDebugClicked: () => {
     socketClientService.dispatchGlobal(FingerControlActions.fingerControl__send(1234, 128));

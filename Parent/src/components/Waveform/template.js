@@ -49,11 +49,17 @@ export default class Waveform extends React.PureComponent {
     });
   }
 
-  componentDidUpdate() {
-    this.props.isPlaying
-    ? this.waveform.play()
-    : this.waveform.pause();
+  rewindTimeline() {
+    this.waveform.stop();
+  }
+
+  componentDidUpdate() { 
     // this.waveform.stop();
+    if (this.props.isPlaying) {
+      this.waveform.play();
+    } else {
+      this.waveform.pause();
+    }
   }
 
   render() {

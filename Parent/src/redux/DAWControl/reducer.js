@@ -31,7 +31,10 @@ function DAWControlReducer(state = initialState, action) {
     
     case DAW_CONTROL__BACKWARD:
       return {
-        ...state
+        ...state,
+        isPlaying: false,
+        currentTime: 0,
+        currentScrollLeft: 0
       }
     
     case DAW_CONTROL__SET_DATA:

@@ -1,6 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { PlayArrow, Pause, SkipPrevious } from '@material-ui/icons';
 import './style.scss';
 
 // Class
@@ -17,12 +15,14 @@ export default class Waveform extends React.PureComponent {
         return (
             <div className="control--component">
                 <div className="control--button-container">
-                    <button className="control--button backward" onClick={() => this.props.onBackwardClicked()}>
-                        <SkipPrevious style={{ fontSize: 80 }} />
+                    <button className="control--button backward" onClick={() => this.props.onPauseBackwardClicked()}>
+                        <img src={this.props.isPlaying ? require(`../../assets/images/icon--stop.svg`) : require(`../../assets/images/icon--back.svg`)} />
                     </button>
-                    <button className="control--button play-pause" onClick={() => this.props.onPlayPauseClicked()}>
-                        <PlayArrow style={{ fontSize: 80, marginRight: -30 }} />
-                        <Pause style={{ fontSize: 80 }} />
+                    <button className="control--button play" onClick={() => this.props.onPlayClicked()}>
+                        <img src={require(`../../assets/images/icon--play.svg`)} />
+                    </button>
+                    <button className="control--button record" onClick={() => this.props.onRecording()}>
+                        <img src={require(`../../assets/images/icon--record.svg`)} />
                     </button>
                 </div>
             </div>
