@@ -8,7 +8,10 @@ export default class Finger extends React.PureComponent {
         super(props);
         this.state = {
             imageSequence: 0,
-            data: []
+            data: [],
+            isMute: false,
+            isSolo: false,
+            isRecording: false
         };
     }
 
@@ -32,10 +35,18 @@ export default class Finger extends React.PureComponent {
                 left: `${datum.time*100 - this.props.offsetLeft - datum.volume/2}px` }} />);
         })
         return (
-            <div className="finger--component">
+            <div className={`finger--component ${this.state.isRecording ? 'is-recording' : ''}  ${this.state.isMute ? 'is-mute' : ''}  ${this.state.isSolo ? 'is-solo' : ''}`}>
                 <div className="header">
                     <img src={require(`../../assets/images/fingers--0.png`)} />
                     <p>{this.props.label}</p>
+                    <div className="controls">
+                        <button className="controls-button mute" onClick={() => { this.setState({ ...this.state, isMute: !this.state.isMute }) }}>M</button>
+                        <button className="controls-button solo" onClick={() => { this.setState({ ...this.state, isSolo: !this.state.isSolo }) }}>S</button>
+                        <button 
+                            className="controls-button recording"
+                            onClick={() => { this.setState({ ...this.state, isRecording: !this.state.isRecording }) }}
+                        >R</button>
+                    </div>
                 </div>
                 <div className="timeline">
                     {dots}

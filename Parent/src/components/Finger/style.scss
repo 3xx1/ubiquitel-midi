@@ -7,6 +7,7 @@
     padding: 20px;
     background-color: $color--yellow__light;
     height: 120px;
+    transition: background-color ease-out 0.1s;
 
     .header {
         width: 100px;
@@ -14,7 +15,7 @@
             width: 100%;
         }
         p {
-            color: #FF180A;
+            color: $color--red;
             text-align: center;
         }
     }
@@ -38,5 +39,39 @@
             background-color: $color--red;
             box-shadow: $shadow--medium;
         }
+    }
+
+    .controls {
+        margin-top: 8px;
+        display: flex;
+        justify-content: center;
+
+        .controls-button {
+            text-align: center;
+            box-shadow: $shadow--light;
+            width: 24px;
+            margin: 0 2px;
+            border: none;
+            outline: none;
+            border-radius: 4px;
+            background-color: $color--yellow__dark;
+            color: $color--yellow__light;
+
+            &:active {
+                opacity: 0.6;
+            }
+        }
+    }
+
+    &.is-recording {
+        background-color: #FFAAAA;
+        .controls {
+            .controls-button.recording {
+                background-color: $color--red;
+            }
+        }
+    }
+    &.is-mute {
+        background-color: #bababa;
     }
 }
