@@ -15,14 +15,21 @@ export default class Finger extends React.PureComponent {
         };
     }
 
+    handleMuteClick() {
+        this.props.handleMuteClick(this.props.fingerId);
+        this.setState({ ...this.state, isMute: !this.state.isMute });
+    }
+
+    handleSoloClick() {
+        this.props.handleSoloClick(this.props.fingerId);
+        this.setState({ ...this.state, isSolo: !this.state.isSolo })
+    }
+
     componentDidMount() {
-        // setInterval(() => {
-        //     this.tapImageSequence();
-        // }, 500);
         this.setState({
             ...this.state,
             data: this.props.data
-        })
+        });
     }
 
     render() {
@@ -40,8 +47,8 @@ export default class Finger extends React.PureComponent {
                     <img src={require(`../../assets/images/fingers--0.png`)} />
                     <p>{this.props.label}</p>
                     <div className="controls">
-                        <button className="controls-button mute" onClick={() => { this.setState({ ...this.state, isMute: !this.state.isMute }) }}>M</button>
-                        <button className="controls-button solo" onClick={() => { this.setState({ ...this.state, isSolo: !this.state.isSolo }) }}>S</button>
+                        <button className={`controls-button mute ${this.state.isMute ? 'button-active' : ''}`} onClick={() => { this.handleMuteClick() }}>M</button>
+                        <button className={`controls-button solo ${this.state.isSolo ? 'button-active' : ''}`} onClick={() => { this.handleSoloClick() }}>S</button>
                         <button 
                             className="controls-button recording"
                             onClick={() => { this.setState({ ...this.state, isRecording: !this.state.isRecording }) }}

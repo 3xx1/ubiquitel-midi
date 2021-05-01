@@ -60,6 +60,14 @@
             &:active {
                 opacity: 0.6;
             }
+
+            &.solo.button-active {
+                background-color: $color--blue__medium;
+            }
+
+            &.mute.button-active {
+                background-color: $color--blue__medium;
+            }
         }
     }
 

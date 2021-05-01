@@ -13,7 +13,9 @@ const mapStateToProps = (state) => {
   return {
     isPlaying: state.DAWControl.isPlaying,
     currentTime: state.DAWControl.currentTime,
-    offsetLeft: state.DAWControl.currentScrollLeft
+    offsetLeft: state.DAWControl.currentScrollLeft,
+    solo: state.DAWControl.solo,
+    mute: state.DAWControl.mute
   }
 };
 
@@ -64,6 +66,20 @@ const mapDispatchToProps = (dispatch) => ({
   setTimelineScroll: (data) => {
     dispatch(DAWControlActions.dawControl__setCurrentTime(data.currentTime || 0));
     dispatch(DAWControlActions.dawControl__setCurrentScrollLeft(data.scrollLeft || 0));
+  },
+  handleSoloClick: ({fingerId, isSolo}) => {
+    dispatch(DAWControlActions.dawControl__setSolo(fingerId));
+    socketClientService.sendDawEvent({
+      eventType: 'DAW__SOLO',
+      buffer: { fingerId, isSolo }
+    });
+  },
+  handleMuteClick: ({fingerId, isMute}) => {
+    dispatch(DAWControlActions.dawControl__setMute(fingerId));
+    socketClientService.sendDawEvent({
+      eventType: 'DAW__MUTE',
+      buffer: { fingerId, isMute }
+    });
   }
 });
 

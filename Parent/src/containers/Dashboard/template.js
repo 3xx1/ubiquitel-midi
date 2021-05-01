@@ -20,6 +20,14 @@ export default class Dashboard extends React.PureComponent {
     this._waveform = React.createRef();
   }
 
+  handleMuteClick(fingerId) {
+    this.props.handleMuteClick({ fingerId, isMute: this.props.mute.find(c => c === fingerId) ? false : true });
+  }
+
+  handleSoloClick(fingerId) {
+    this.props.handleSoloClick({ fingerId, isSolo: this.props.solo.find(c => c === fingerId) ? false : true });
+  }
+
   componentDidMount() {
   }
 
@@ -44,9 +52,18 @@ export default class Dashboard extends React.PureComponent {
           onWaveScrolled={(data) => this.props.setTimelineScroll(data)}
           onWaveInteracted={(time) => this.props.setTimelineScroll(time)}
         />
-        {fingerData.map((finger) => {
+        {fingerData.map((finger, index) => {
           return (
-            <Finger label={finger.name} data={finger.data} offsetLeft={this.props.offsetLeft} />
+            <Finger
+              fingerId={`finger--${index}`}
+              label={finger.name}
+              data={finger.data}
+              isSolo={this.props.solo.find(s => s === `finger--${index}`)}
+              isMute={this.props.mute.find(m => m === `finger--${index}`) || (this.props.solo.length > 0 && !this.props.solo.find(s => s === `finger--${index}`))}
+              offsetLeft={this.props.offsetLeft}
+              handleSoloClick={(fingerId) => { this.handleSoloClick(fingerId) }}
+              handleMuteClick={(fingerId) => { this.handleMuteClick(fingerId) }}
+            />
           );
         })}
       </div>
