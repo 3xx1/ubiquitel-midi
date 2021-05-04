@@ -1,0 +1,56 @@
+@import '../../styles/colors';
+@import '../../styles/effects';
+
+.finger-node--component {
+   width: 180px;
+   height: 200px;
+   border: 1px solid white;
+
+  .finger-node--image-container {
+     width: 100%;
+     padding: 15px;
+
+     &.muted {
+       filter: grayscale(1);
+     }
+
+    img {
+      width: calc(100% - 30px);
+    }
+  }
+
+  .finger-node--label {
+    color: white;
+  }
+
+  .finger-node--controls {
+    display: flex;
+    margin-top: 12px;
+    cursor: pointer;
+
+    .finger-node--control {
+      width: 30px;
+      height: 30px;
+      border: 1px solid white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .finger-node--control-copy {
+        color: white;
+      }
+
+      &.recording.active {
+        background-color: red;
+      }
+
+      &.solo.active {
+        background-color: blue;
+      }
+
+      &.mute.active {
+        background-color: gray;
+      }
+    }
+  }
+}
