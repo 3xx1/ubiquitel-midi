@@ -15,7 +15,11 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  
+  tapFinger: () => {
+    const id = socketClientService.socket.id;
+    if (id)
+      socketClientService.dispatchGlobal(FingerControlActions.fingerControl__tap(id));
+  }
 });
 
 export default connect(

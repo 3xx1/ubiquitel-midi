@@ -9,12 +9,15 @@ const socketClientService = new SocketClientService({ type: 'parent' });
 
 const mapStateToProps = (state) => {
   return {
-    activeSessions: state.DAWControl.activeSessions
+    activeSessions: state.DAWControl.activeSessions,
+    lastTappedId: state.FingerControl.lastTappedId
   }
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  
+  clearLastTappedId: () => {
+    socketClientService.dispatchGlobal(FingerControlActions.fingerControl__tap_clear());
+  }
 });
 
 export default connect(

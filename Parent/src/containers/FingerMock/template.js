@@ -28,6 +28,7 @@ export default class FingerMock extends React.PureComponent {
     setTimeout(() => { this.setState({ ...this.state, fingerImgIndex: 1 }) }, stepMs * 2);
     setTimeout(() => { this.setState({ ...this.state, fingerImgIndex: 0 }) }, stepMs * 3);
     setTimeout(() => { this.setState({ ...this.state, isTapping: false }) }, stepMs * 4);
+    this.props.tapFinger();
   }
 
   componentDidMount() {
