@@ -6,7 +6,8 @@ import {
   DAW_CONTROL__SET_MUTE,
   DAW_CONTROL__SET_DATA,
   DAW_CONTROL__SET_CURRENT_TIME,
-  DAW_CONTROL__SET_CURRENT_SCROLL_LEFT
+  DAW_CONTROL__SET_CURRENT_SCROLL_LEFT,
+  DAW_CONTROL__SET_ACTIVE_SESSIONS
 } from './constants';
 
 export function dawControl__play() {
@@ -58,6 +59,13 @@ export function dawControl__setCurrentTime(payload) {
 export function dawControl__setCurrentScrollLeft(payload) {
   return {
     type: DAW_CONTROL__SET_CURRENT_SCROLL_LEFT,
+    payload
+  }
+}
+
+export function dawControl__setActiveSessions(payload) {
+  return {
+    type: DAW_CONTROL__SET_ACTIVE_SESSIONS,
     payload
   }
 }

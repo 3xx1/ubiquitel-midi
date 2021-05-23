@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 
 // Containers
 import Dashboard from '../Dashboard/loadable';
+import FingerMock from '../FingerMock/loadable';
 import Mesh from '../Mesh/loadable';
 
 // Styles
@@ -15,6 +16,7 @@ class App extends Component {
         <div className="app-contents">
           <Switch>
             <Route path="/dashboard" component={Dashboard} />
+            <Route path="/finger-mock" component={FingerMock} />
             <Route path="/" component={Mesh} />
           </Switch>
         </div>

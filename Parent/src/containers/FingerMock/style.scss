@@ -1,0 +1,28 @@
+.container__finger-mock {
+  background-color: #000000;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .finger-mock__wrapper {
+    width: 200px;
+    text-align: center;
+
+    img {
+      width: 100%;
+    }
+
+    .finger-mock__button {
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+      width: 40px;
+      border: 1px solid white;
+      color: white;
+      margin: 20px auto 0;
+      padding: 8px 20px;
+    }
+  }
+}

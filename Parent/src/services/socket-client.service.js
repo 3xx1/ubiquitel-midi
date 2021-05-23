@@ -5,13 +5,16 @@ import * as io from 'socket.io-client';
 import { store } from '../index.js';
 import { environment } from '../environment';
 
+import * as DawControlActions from '../redux/DAWControl/actions';
+
 export default class SocketClientService {
-  constructor(type = 'children') {
+  constructor(option) {
     const self = this;
+    if (option && option.type) self.type = option.type;
     self.url = process.env.NODE_ENV === 'production'
             ? `http://${window.document.location.hostname}:${environment.production.socketPort}/`
             : `http://${window.document.location.hostname}:${environment.development.socketPort}/`;
-    self.socket = io( self.url );
+    self.socket = io( self.url, { query: { type: self.type || 'child' } } );
 
     self.socket.on('action.dispatch', (action) => {
       store.dispatch(action);
@@ -20,6 +23,10 @@ export default class SocketClientService {
     self.socket.on('refresh', () => {
       document.location.reload(true);
     });
+
+    self.socket.on('sessions', (sessions) => {
+      this.dispatchGlobal(DawControlActions.dawControl__setActiveSessions(sessions));
+    })
   }
 
   dispatchGlobal(action) {

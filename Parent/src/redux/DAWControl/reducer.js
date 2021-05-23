@@ -6,11 +6,13 @@ import {
   DAW_CONTROL__SET_MUTE,
   DAW_CONTROL__SET_DATA,
   DAW_CONTROL__SET_CURRENT_TIME,
-  DAW_CONTROL__SET_CURRENT_SCROLL_LEFT
+  DAW_CONTROL__SET_CURRENT_SCROLL_LEFT,
+  DAW_CONTROL__SET_ACTIVE_SESSIONS
 } from './constants';
 
 const initialState = {
   isPlaying: false,
+  activeSessions: [],
   audioDuration: 0,
   currentTime: 0,
   currentScrollLeft: 0,
@@ -69,6 +71,12 @@ function DAWControlReducer(state = initialState, action) {
       return {
         ...state,
         currentScrollLeft: action.payload
+      }
+    
+    case DAW_CONTROL__SET_ACTIVE_SESSIONS:
+      return {
+        ...state,
+        activeSessions: action.payload
       }
     
     default:

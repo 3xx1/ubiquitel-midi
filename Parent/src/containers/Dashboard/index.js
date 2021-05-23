@@ -7,7 +7,7 @@ import Dashboard from './template';
 import { generateFingerSignal } from '../../helpers/generateSignal';
 
 import SocketClientService from '../../services/socket-client.service';
-const socketClientService = new SocketClientService();
+const socketClientService = new SocketClientService({ type: 'parent' });
 
 const mapStateToProps = (state) => {
   return {
