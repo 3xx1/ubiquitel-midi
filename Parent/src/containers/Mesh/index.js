@@ -15,6 +15,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  tapFinger: (id) => {
+    console.log('mesh event run')
+    socketClientService.dispatchGlobal(FingerControlActions.fingerControl__tap(id));
+  },
   clearLastTappedId: () => {
     socketClientService.dispatchGlobal(FingerControlActions.fingerControl__tap_clear());
   }

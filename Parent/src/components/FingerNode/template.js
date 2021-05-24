@@ -16,11 +16,14 @@ export default class FingerNode extends React.PureComponent {
 
     tapFinger() {
       const stepMs = 75;
-      this.setState({ ...this.state, isTapping: true, fingerImgIndex: 1 });
-      setTimeout(() => { this.setState({ ...this.state, fingerImgIndex: 2 }) }, stepMs * 1);
-      setTimeout(() => { this.setState({ ...this.state, fingerImgIndex: 1 }) }, stepMs * 2);
-      setTimeout(() => { this.setState({ ...this.state, fingerImgIndex: 0 }) }, stepMs * 3);
-      setTimeout(() => { this.setState({ ...this.state, isTapping: false }) }, stepMs * 4);
+      if (!this.isTapping) {
+        this.setState({ ...this.state, isTapping: true, fingerImgIndex: 1 });
+        setTimeout(() => { this.setState({ ...this.state, fingerImgIndex: 2 }) }, stepMs * 1);
+        setTimeout(() => { this.setState({ ...this.state, fingerImgIndex: 1 }) }, stepMs * 2);
+        setTimeout(() => { this.setState({ ...this.state, fingerImgIndex: 0 }) }, stepMs * 3);
+        setTimeout(() => { this.setState({ ...this.state, isTapping: false }) }, stepMs * 4);
+      }
+      this.props.tapFinger();
     }
 
     handleRecordingClick() {

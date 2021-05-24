@@ -10,12 +10,14 @@ const socketClientService = new SocketClientService();
 
 const mapStateToProps = (state) => {
   return {
-    
+    id: socketClientService.socket.id,
+    lastTappedId: state.FingerControl.lastTappedId 
   }
 };
 
 const mapDispatchToProps = (dispatch) => ({
   tapFinger: () => {
+    console.log('mock event run')
     const id = socketClientService.socket.id;
     if (id)
       socketClientService.dispatchGlobal(FingerControlActions.fingerControl__tap(id));

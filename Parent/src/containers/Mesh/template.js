@@ -48,6 +48,7 @@ export default class Mesh extends React.PureComponent {
               updateIsRecording={(flag) => { console.log(flag) }}
               updateIsMute={(flag) => {console.log(flag)}}
               updateIsSolo={(flag) => { console.log(flag) }}
+              tapFinger={() => { this.props.tapFinger(activeSession.id) }}
             />
           }
         )}

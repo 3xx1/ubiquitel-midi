@@ -23,11 +23,16 @@ export default class FingerMock extends React.PureComponent {
 
   tapFinger() {
     const stepMs = 80;
-    this.setState({ ...this.state, isTapping: true, fingerImgIndex: 1 });
-    setTimeout(() => { this.setState({ ...this.state, fingerImgIndex: 2 }) }, stepMs * 1);
-    setTimeout(() => { this.setState({ ...this.state, fingerImgIndex: 1 }) }, stepMs * 2);
-    setTimeout(() => { this.setState({ ...this.state, fingerImgIndex: 0 }) }, stepMs * 3);
-    setTimeout(() => { this.setState({ ...this.state, isTapping: false }) }, stepMs * 4);
+    if (!this.state.isTapping) {
+      this.setState({ ...this.state, isTapping: true, fingerImgIndex: 1 });
+      setTimeout(() => { this.setState({ ...this.state, fingerImgIndex: 2 }) }, stepMs * 1);
+      setTimeout(() => { this.setState({ ...this.state, fingerImgIndex: 1 }) }, stepMs * 2);
+      setTimeout(() => { this.setState({ ...this.state, fingerImgIndex: 0 }) }, stepMs * 3);
+      setTimeout(() => { this.setState({ ...this.state, isTapping: false }) }, stepMs * 4);
+    }
+  }
+
+  propagateTapFingerEvent() {
     this.props.tapFinger();
   }
 
@@ -35,11 +40,12 @@ export default class FingerMock extends React.PureComponent {
   }
 
   render() {
+    if (this.props.lastTappedId === this.props.id ) this.tapFinger();
     return (
       <div className="container__finger-mock">
         <div className="finger-mock__wrapper">
           <img src={require(`../../assets/images/fingers--${this.state.fingerImgIndex}.png`)} />
-          <div className="finger-mock__button" onClick={() => { this.tapFinger() }}>Tap</div>
+          <div className="finger-mock__button" onClick={() => { this.tapFinger(); this.propagateTapFingerEvent(); }}>Tap</div>
         </div>
       </div>
     );
