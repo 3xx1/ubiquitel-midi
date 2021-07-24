@@ -7,8 +7,6 @@ export default class FingerNode extends React.PureComponent {
       super(props);
       this.state = {
         isRecording: false,
-        isSolo: false,
-        isMute: false,
         fingerImgIndex: 0,
         isTapping: false
       };
@@ -53,7 +51,7 @@ export default class FingerNode extends React.PureComponent {
     render() {  
       return (
           <div className={`finger-node--component`}>
-            <div className={`finger-node--image-container ${this.state.isMute ? 'muted' : ''} ${this.state.isRecording ? 'recording' : ''} ${this.state.isSolo ? 'solo' : ''}`}>
+            <div className={`finger-node--image-container ${this.state.isRecording ? 'recording' : ''} ${this.props.isSolo ? 'solo' : ''} ${this.props.isMute ? 'muted' : ''}`}>
               <img src={require(`../../assets/images/fingers--${this.state.fingerImgIndex}.png`)} />
               <h6 className="finger-node--label">{this.props.name}</h6>
               <div className="finger-node--controls">
@@ -61,10 +59,10 @@ export default class FingerNode extends React.PureComponent {
                   <div className={`finger-node--control recording ${this.state.isRecording ? 'active' : ''}`} onClick={() => { this.handleRecordingClick(); }}>
                     <p className="finger-node--control-copy">R</p>
                   </div>
-                  <div className={`finger-node--control solo ${this.state.isSolo ? 'active' : ''}`} onClick={() => { this.handleSoloClick(); }}>
+                  <div className={`finger-node--control solo ${this.props.isSolo ? 'active' : ''}`} onClick={() => { this.handleSoloClick(); }}>
                     <p className="finger-node--control-copy">S</p>
                   </div>
-                  <div className={`finger-node--control mute ${this.state.isMute ? 'active' : ''}`} onClick={() => { this.handleMuteClick(); }}>
+                  <div className={`finger-node--control mute ${this.props.isMute ? 'active' : ''}`} onClick={() => { this.handleMuteClick(); }}>
                     <p className="finger-node--control-copy">M</p>
                   </div>
                 </div>

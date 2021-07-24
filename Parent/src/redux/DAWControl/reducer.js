@@ -7,7 +7,9 @@ import {
   DAW_CONTROL__SET_DATA,
   DAW_CONTROL__SET_CURRENT_TIME,
   DAW_CONTROL__SET_CURRENT_SCROLL_LEFT,
-  DAW_CONTROL__SET_ACTIVE_SESSIONS
+  DAW_CONTROL__SET_ACTIVE_SESSIONS,
+  DAW_CONTROL__SET_ACTION_SESSION__IS_MUTE_STATE,
+  DAW_CONTROL__SET_ACTION_SESSION__IS_SOLO_STATE
 } from './constants';
 
 const initialState = {
@@ -79,6 +81,28 @@ function DAWControlReducer(state = initialState, action) {
         activeSessions: action.payload
       }
     
+    case DAW_CONTROL__SET_ACTION_SESSION__IS_MUTE_STATE:
+      return {
+        ...state,
+        activeSessions: state.activeSessions.map((session) => {
+          if (session.id === action.payload.id) {
+            session.isMute = action.payload.flag;
+          }
+          return session;
+        })        
+      }
+    
+    case DAW_CONTROL__SET_ACTION_SESSION__IS_SOLO_STATE:
+      return {
+        ...state,
+        activeSessions: state.activeSessions.map((session) => {
+          if (session.id === action.payload.id) {
+            session.isSolo = action.payload.flag;
+          }
+          return session;
+        })
+      }
+
     default:
       return state;
   }

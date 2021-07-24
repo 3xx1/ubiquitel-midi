@@ -15,8 +15,23 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  // Mute State
+  updateMuteState(obj) {
+    const { id, flag } = obj;
+    if (id) {
+      socketClientService.dispatchGlobal(DAWControlActions.dawControl__setActiveSessionIsMute({ id, flag }));
+    }
+  },
+
+  updateSoloState(obj) {
+    const { id, flag } = obj;
+    if (id) {
+      socketClientService.dispatchGlobal(DAWControlActions.dawControl__setActiveSessionIsSolo({ id, flag }));
+    }
+  },
+
+  // Tap Finger
   tapFinger: (id) => {
-    console.log('mesh event run')
     socketClientService.dispatchGlobal(FingerControlActions.fingerControl__tap(id));
   },
   clearLastTappedId: () => {

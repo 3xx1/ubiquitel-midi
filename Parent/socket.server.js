@@ -13,7 +13,7 @@ io.on('connection', function(socket) {
   // Client Connection Acq
   console.log('[socket-server] A User Connected.', socket.id);
   var type = socket.handshake.query.type || 'child';
-  active_sessions.push({ id: socket.id, type: type });
+  active_sessions.push({ id: socket.id, type: type, isMute: false, isSolo: false });
   socket.emit('sessions', active_sessions);
 
   // Remote Action Dispatcher
