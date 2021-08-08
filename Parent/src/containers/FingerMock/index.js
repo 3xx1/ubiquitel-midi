@@ -11,7 +11,9 @@ const socketClientService = new SocketClientService();
 const mapStateToProps = (state) => {
   return {
     id: socketClientService.socket.id,
-    lastTappedId: state.FingerControl.lastTappedId 
+    lastTappedId: state.FingerControl.lastTappedId,
+    activeSessions: state.DAWControl.activeSessions,
+    isPlaying: state.DAWControl.isPlaying
   }
 };
 

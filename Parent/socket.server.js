@@ -25,7 +25,11 @@ io.on('connection', function(socket) {
   // Send Data Broadcast - DAW Level
   socket.on('buffer.daw.send.broadcast', function(msg) {
     socket.broadcast.emit('buffer.daw', msg);
-    console.log('buffer.daw', msg);
+    // console.log('buffer.daw', msg);
+  });
+
+  socket.on('buffer.daw', function (msg) {
+    console.log(msg, 'msg on buffer.daw');
   });
 
   // Send Data Broadcast - Finger Level

@@ -12,6 +12,10 @@
 
     img {
       width: 100%;
+
+      &.mute {
+        filter: grayscale(1);
+      }
     }
 
     .finger-mock__button {
