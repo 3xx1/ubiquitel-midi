@@ -7,9 +7,12 @@ import {
   DAW_CONTROL__SET_DATA,
   DAW_CONTROL__SET_CURRENT_TIME,
   DAW_CONTROL__SET_CURRENT_SCROLL_LEFT,
+  DAW_CONTROL__SET_ACTIVE_SESSION,
   DAW_CONTROL__SET_ACTIVE_SESSIONS,
   DAW_CONTROL__SET_ACTION_SESSION__IS_MUTE_STATE,
-  DAW_CONTROL__SET_ACTION_SESSION__IS_SOLO_STATE
+  DAW_CONTROL__SET_ACTION_SESSION__IS_SOLO_STATE,
+  DAW_CONTROL__SET_ACTIVE_SESSION_DATA,
+  DAW_CONTROL__UPDATE_ACTIVE_SESSION_DATA
 } from './constants';
 
 export function dawControl__play() {
@@ -65,6 +68,13 @@ export function dawControl__setCurrentScrollLeft(payload) {
   }
 }
 
+export function dawControl__setActiveSession(payload) {
+  return {
+    type: DAW_CONTROL__SET_ACTIVE_SESSION,
+    payload
+  }
+}
+
 export function dawControl__setActiveSessions(payload) {
   return {
     type: DAW_CONTROL__SET_ACTIVE_SESSIONS,
@@ -82,6 +92,20 @@ export function dawControl__setActiveSessionIsMute(payload) {
 export function dawControl__setActiveSessionIsSolo(payload) {
   return {
     type: DAW_CONTROL__SET_ACTION_SESSION__IS_SOLO_STATE,
+    payload
+  }
+}
+
+export function dawControl__setActiveSessionData(payload) {
+  return {
+    type: DAW_CONTROL__SET_ACTIVE_SESSION_DATA,
+    payload
+  }
+}
+
+export function dawControl__updateActiveSessionData(payload) {
+  return {
+    type: DAW_CONTROL__UPDATE_ACTIVE_SESSION_DATA,
     payload
   }
 }

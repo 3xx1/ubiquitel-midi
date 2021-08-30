@@ -32,6 +32,7 @@ export default class SocketClientService {
 
     self.socket.on('sessions', (sessions) => {
       this.dispatchGlobal(DawControlActions.dawControl__setActiveSessions(sessions));
+      console.log(sessions, 'sessions');
     })
 
     // self.socket.on('buffer.daw', (message) => {
