@@ -1,5 +1,4 @@
-boolean fetchServerInfo()
-{
+boolean fetchServerInfo() {
   //jsonファイルをダウンロード
   WiFiClientSecure client;
   HTTPClient https;
@@ -33,8 +32,7 @@ boolean fetchServerInfo()
   return parse(payload);
 }
 
-boolean parse(String p)
-{
+boolean parse(String p) {
   JSONVar myObject = JSON.parse(p.c_str());
 
   if (JSON.typeof(myObject) == "undefined")
@@ -46,7 +44,8 @@ boolean parse(String p)
   if (myObject.hasOwnProperty("address") && myObject.hasOwnProperty("port"))
   {
     Serial.print("address: ");
-    serverURL = myObject["address"];
+    String url = JSONVar::stringify(myObject["address"]);
+    serverURL = url.substring(url.indexOf('"')+1, url.lastIndexOf('"'));
     Serial.println(serverURL);
 
     Serial.print("port: ");

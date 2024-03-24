@@ -5,12 +5,15 @@ void updateUbState() {
   if(playRequest) {
     play();
   }
-  if(us == DOWN || us == UP) {
+  if((us == DOWN || us == UP) && !pauseUb) {
     stepForward();
   }
 }
 
 void stepForward() {
+  while(signals[r][next] < gtime) {
+    upDown();
+  }
   if(signals[r][next] == gtime) {
     //上げ下ろしの動作切り替え
     upDown();
@@ -44,13 +47,16 @@ void stop() {
   next = 0;
   stepCount = 0;
   stopRequest = false;
+  pauseUb = false;
 }
 
 void play() {
-  if(numSignals[w] > 0) {
+  if(numSignals[w] > 0 && us == STOP) {
     swapBuffer();
     down();
-  }else {
+  }else if(us != STOP && pauseUb) {
+    pauseUb = false;
+  }else if(numSignals[w] == 0) {
     Serial.println("buffer empty, play failed.");
   }
   playRequest = false;
@@ -77,7 +83,7 @@ void swapBuffer() {
 }
 
 void driveMotor() {
-  if(us == DOWN || us == STOP || mute) {
+  if(us == DOWN || us == STOP || muteUb) {
     stopMotor();
   }else if(us == UP) {
     stepMotor();
@@ -87,32 +93,31 @@ void driveMotor() {
 void stepMotor()
 {
     digitalWrite(Vs2B, HIGH);
-    digitalWrite(PS, LOW);
+    digitalWrite(PoS, LOW);
     digitalWrite(LED, HIGH);
-  
     switch (stepCount) {
       case 0:    // 00
         digitalWrite(inA, LOW);
         digitalWrite(inB, LOW);
         break;
       case 1:    // 10
-        digitalWrite(inA, HIGH);
-        digitalWrite(inB, LOW);
+        digitalWrite(inA, LOW);
+        digitalWrite(inB, HIGH);
         break;
       case 2:    //11
         digitalWrite(inA, HIGH);
         digitalWrite(inB, HIGH);
         break;
       case 3:    //01
-        digitalWrite(inA, LOW);
-        digitalWrite(inB, HIGH);
+        digitalWrite(inA, HIGH);
+        digitalWrite(inB, LOW);
         break;
     }
-    stepCount = stepCount++%4;
+    stepCount = ++stepCount%4;
 }
 
 void stopMotor() {
-    digitalWrite(PS, HIGH);
+    digitalWrite(PoS, HIGH);
     digitalWrite(Vs2B, LOW);
     digitalWrite(LED, LOW);
 }

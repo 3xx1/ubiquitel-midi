@@ -5,17 +5,18 @@ void checkTestTap()
 {
   if (!digitalRead(testButton) && !testTap && setupMode) {
     testTap = true;
+    Serial.println("Tapping!");
   }
   if (testTap) {
-    if (stepCount < 32) {
+    if (gtime < 32) {
       stepMotor();
-      stepCount++;
+      gtime++;
     }
-    else if (stepCount < 45) {
+    else if (gtime < 45) {
       stopMotor();
-      stepCount++;
+      gtime++;
     } else {
-      stepCount = 0;
+      gtime = 0;
       testTap = false;
     }
   }

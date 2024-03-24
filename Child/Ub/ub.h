@@ -5,8 +5,7 @@ char password[256] = "";
 //Ubiquitel Server-----------------------
 String serverURL;
 int serverPort;
-SocketIoClient webSocket;
-
+SocketIOclient webSocket;
 //Tap-------------------------------------
 typedef struct Signal
 {
@@ -24,8 +23,9 @@ typedef enum {
 UbState us = STOP;
 bool stopRequest = false;
 bool playRequest = false;
-bool mute = false;
-int signals[2][512];
+bool pauseUb = false;
+bool muteUb = false;
+long signals[2][512];
 int numSignals[2] = {0, 0};
 int looptime[2] = {0, 0};
 int repeat[2];
@@ -48,7 +48,7 @@ int res = 5;
 
 //Setup Mode------------------------------
 boolean testTap = false;
-boolean setupMode = 0;
+boolean setupMode = true;
 int pushed = 0;
 unsigned long pushedTime = 0;
-int testButton = 0;
+int testButton = 2;

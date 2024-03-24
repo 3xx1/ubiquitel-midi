@@ -5,7 +5,7 @@
 /* Set these to your desired credentials. */
 const char *ubssid = APSSID;
 
-ESP8266WebServer server(80);
+WebServer server(80);
 
 const String postForms = "<html>\
   <head>\

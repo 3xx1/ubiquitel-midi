@@ -1,23 +1,24 @@
-#include <ESP8266WiFi.h>
+#include <WiFi.h>
 #include <WiFiClient.h>
-#include <ESP8266WebServer.h>
-#include <ESP8266mDNS.h>
+#include <WebServer.h>
+#include <ESPmDNS.h>
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
 #include <Ticker.h>
 #include <EEPROM.h>
-#include <SocketIoClient.h>
+#include <SocketIOclient.h>
+#include <WebSocketsClient.h>
 #include <Arduino_JSON.h>
 #include <WiFiClientSecure.h>
-#include <ESP8266HTTPClient.h>
+#include <HTTPClient.h>
 #include "ub.h"
 
 //IO
-const int inA = 4;
-const int inB = 5;
-const int PS = 12;
+const int inA = 5;
+const int inB = 17;
+const int PoS = 4;
 const int dock = 13;
-const int Vs2B = 14;
+const int Vs2B = 15;
 const int LED = 16;
 
 void setup()
@@ -29,7 +30,7 @@ void setup()
   pinMode(inA, OUTPUT);
   pinMode(inB, OUTPUT);
   pinMode(dock, INPUT_PULLUP);
-  pinMode(PS, OUTPUT);
+  pinMode(PoS, OUTPUT);
   pinMode(Vs2B, OUTPUT);
   pinMode(LED, OUTPUT);
   pinMode(testButton, INPUT_PULLUP);
@@ -37,7 +38,7 @@ void setup()
   digitalWrite(inA, LOW);
   digitalWrite(inB, LOW);
   digitalWrite(Vs2B, LOW);
-  digitalWrite(PS, HIGH);
+  digitalWrite(PoS, HIGH);
   digitalWrite(LED, LOW);
 
   ticker.attach(0.005, timer);
