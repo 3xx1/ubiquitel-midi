@@ -6,8 +6,8 @@
 #include <ArduinoOTA.h>
 #include <Ticker.h>
 #include <EEPROM.h>
-#include <SocketIOclient.h>
-#include <WebSocketsClient.h>
+#include <SocketIOclient.h>//ArduinoWebsockets: https://github.com/Links2004/arduinoWebSockets
+#include <WebSocketsClient.h>//ArduinoWebsockets: https://github.com/Links2004/arduinoWebSockets
 #include <Arduino_JSON.h>
 #include <WiFiClientSecure.h>
 #include <HTTPClient.h>

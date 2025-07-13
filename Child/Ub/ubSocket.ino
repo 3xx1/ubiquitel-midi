@@ -79,7 +79,7 @@ void setupSocketIO()
     Serial.println("SocketIO connecting...");
     //webSocket.on("buffer.daw", event);
     //webSocket.on("action.dispatch", event);
-    webSocket.begin(serverURL, serverPort, "/socket.io/?EIO=4");
+    webSocket.beginSSL(serverURL, serverPort, "/sx/socket.io/?EIO=4");
     webSocket.onEvent(socketIOEvent);
     //webSocket.setAuthorization("ubi", "finger");
   } else {
