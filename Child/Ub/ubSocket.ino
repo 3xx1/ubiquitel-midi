@@ -38,7 +38,23 @@ void eventHandler(char* p) {
   {
     Serial.println("input parsing failed!");
   }
-  if (myObject[0] == (JSONVar)"event.trigger")
+  
+  if (myObject[0] == (JSONVar)"event.set.data")
+  {
+    for(int i=0; i < myObject[1]["data"].length(); i++) {
+      signals[w][i] = (long)myObject[1]["data"][i];//ユビ上げ下げ時刻
+    }
+    numSignals[w] = myObject[1]["data"].length();
+    playRequest = true;
+    Serial.print("received ");
+    Serial.print(myObject[1]["data"].length()/2);
+    Serial.println("taps.");
+    webSocket.send(sIOtype_ACK, "event.set.data");//ACK送信
+  }else if (myObject[0] == (JSONVar)"event.pause")
+  {
+    stopRequest = true;
+    webSocket.send(sIOtype_ACK, "event.pause");//ACK送信
+  }else if (myObject[0] == (JSONVar)"event.trigger")
   {
     signals[w][0] = gtime + (long)myObject[1]["data"][0];//ユビ振り上げ時刻
     signals[w][1] = gtime + (long)myObject[1]["data"][1];//ユビ振り下げ時刻
@@ -47,12 +63,6 @@ void eventHandler(char* p) {
   }else if (myObject[0] == (JSONVar)"event.play")
   {
     playRequest = true;
-  }else if (myObject[0] == (JSONVar)"event.set.data")
-  {
-    for(int i=0; i < myObject[1]["data"].length(); i++) {
-      signals[w][i] = (long)myObject[1]["data"][i];//ユビ振り上げ時刻
-    }
-    numSignals[w] = myObject[1]["data"].length();
   }else if (myObject[0] == (JSONVar)"event.set.time")
   {
     if(JSONVar::typeof(myObject[1]["data"]) == "string") {
@@ -62,9 +72,6 @@ void eventHandler(char* p) {
       gtime = (unsigned long)myObject[1]["data"];
     }
     Serial.println(gtime);
-  }else if (myObject[0] == (JSONVar)"event.pause")
-  {
-    pauseUb = true;
   }else if (myObject[0] == (JSONVar)"event.set.mute")
   {
     muteUb = true;

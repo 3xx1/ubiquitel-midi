@@ -11,9 +11,6 @@ void updateUbState() {
 }
 
 void stepForward() {
-  while(signals[r][next] < gtime) {
-    upDown();
-  }
   if(signals[r][next] == gtime) {
     //上げ下ろしの動作切り替え
     upDown();
@@ -80,6 +77,10 @@ void swapBuffer() {
   next = 0;
   r = (r+1)%2;
   w = (w+1)%2;
+
+  while(signals[r][next] < 0) {
+    next += 2;
+  }
 }
 
 void driveMotor() {
