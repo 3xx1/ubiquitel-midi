@@ -1,3 +1,8 @@
+String ack_playChanged = "[\"event.ack.playChanged\",{ \"isPlaying\": true }]";
+String ack_pauseChanged = "[\"event.ack.playChanged\",{ \"isPlaying\": false }]";
+String ack_bufferUpdated = "[\"event.ack.bufferUpdated\",\"\"]";
+String ack_playDone = "[\"event.ack.playDone\",\"\"]";
+
 void updateUbState() {
   if(stopRequest) {
     stop();
@@ -32,6 +37,8 @@ void upDown() {
     if(numSignals[w] > 0) {
       swapBuffer();
     }else {//バッファが空なら停止
+      webSocket.sendEVENT(ack_playDone);//ACK送信
+
       stop();
       Serial.println("buffer empty, stopped.");
     }
@@ -45,16 +52,21 @@ void stop() {
   stepCount = 0;
   stopRequest = false;
   pauseUb = false;
+
+  webSocket.sendEVENT(ack_pauseChanged);//ACK送信
 }
 
 void play() {
   if(numSignals[w] > 0 && us == STOP) {
     swapBuffer();
     down();
+    webSocket.sendEVENT(ack_playChanged);//ACK送信
   }else if(us != STOP && pauseUb) {
     pauseUb = false;
+    webSocket.sendEVENT(ack_playChanged);//ACK送信
   }else if(numSignals[w] == 0) {
     Serial.println("buffer empty, play failed.");
+    webSocket.sendEVENT(ack_pauseChanged);//ACK送信    
   }
   playRequest = false;
 }
@@ -81,6 +93,8 @@ void swapBuffer() {
   while(signals[r][next] < 0) {
     next += 2;
   }
+
+  webSocket.sendEVENT(ack_bufferUpdated);//ACK送信
 }
 
 void driveMotor() {

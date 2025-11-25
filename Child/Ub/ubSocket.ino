@@ -1,5 +1,5 @@
-  //Serial.printf("got message: %s\n", payload);
-  //parseUbInfo((char *)payload);
+String ack_dataChanged = "[\"event.ack.dataChanged\",\"\"]";
+
 void socketIOEvent(socketIOmessageType_t type, uint8_t * payload, size_t length) {
     switch(type) {
         case sIOtype_DISCONNECT:
@@ -31,29 +31,28 @@ void socketIOEvent(socketIOmessageType_t type, uint8_t * payload, size_t length)
 }
 
 void eventHandler(char* p) {
-  //テスト
   JSONVar myObject = JSON.parse(p);
 
   if (JSON.typeof(myObject) == "undefined")
   {
     Serial.println("input parsing failed!");
   }
-  
   if (myObject[0] == (JSONVar)"event.set.data")
   {
     for(int i=0; i < myObject[1]["data"].length(); i++) {
       signals[w][i] = (long)myObject[1]["data"][i];//ユビ上げ下げ時刻
     }
     numSignals[w] = myObject[1]["data"].length();
-    playRequest = true;
     Serial.print("received ");
     Serial.print(myObject[1]["data"].length()/2);
     Serial.println("taps.");
-    webSocket.send(sIOtype_ACK, "event.set.data");//ACK送信
+
+    webSocket.sendEVENT(ack_dataChanged);//ACK送信
+    playRequest = true;//近々削除（別途play.dataで再生指示）
   }else if (myObject[0] == (JSONVar)"event.pause")
   {
     stopRequest = true;
-    webSocket.send(sIOtype_ACK, "event.pause");//ACK送信
+    
   }else if (myObject[0] == (JSONVar)"event.trigger")
   {
     signals[w][0] = gtime + (long)myObject[1]["data"][0];//ユビ振り上げ時刻
