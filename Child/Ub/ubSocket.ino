@@ -48,8 +48,7 @@ void eventHandler(char* p) {
     Serial.println("taps.");
 
     webSocket.sendEVENT(ack_dataChanged);//ACK送信
-    playRequest = true;//近々削除（別途play.dataで再生指示）
-  }else if (myObject[0] == (JSONVar)"event.pause")
+  }else if (myObject[0] == (JSONVar)"event.set.pause")
   {
     stopRequest = true;
     
@@ -59,9 +58,13 @@ void eventHandler(char* p) {
     signals[w][1] = gtime + (long)myObject[1]["data"][1];//ユビ振り下げ時刻
     numSignals[w] = 2;
     playRequest = true;
-  }else if (myObject[0] == (JSONVar)"event.play")
+  }else if (myObject[0] == (JSONVar)"event.set.play")
   {
-    playRequest = true;
+    if((bool)myObject[1]["isPlaying"] == true) {
+      playRequest = true;
+    }else {
+      stopRequest = true;
+    }
   }else if (myObject[0] == (JSONVar)"event.set.time")
   {
     if(JSONVar::typeof(myObject[1]["data"]) == "string") {

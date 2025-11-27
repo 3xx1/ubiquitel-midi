@@ -64,7 +64,7 @@ void play() {
   }else if(us != STOP && pauseUb) {
     pauseUb = false;
     webSocket.sendEVENT(ack_playChanged);//ACK送信
-  }else if(numSignals[w] == 0) {
+  }else if(numSignals[w] == 0 && us == STOP) {
     Serial.println("buffer empty, play failed.");
     webSocket.sendEVENT(ack_pauseChanged);//ACK送信    
   }
